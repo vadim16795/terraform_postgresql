@@ -1,3 +1,14 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+    }
+    postgresql = {
+      source = "terraform-providers/postgresql"
+    }
+  }
+}
+
 provider "google" {
  credentials = var.google_creds
  project     = "varkhipovgcloudpostgresql"
