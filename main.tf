@@ -38,13 +38,3 @@ resource "google_sql_database_instance" "master" {
       }
   }
 }
-resource "google_sql_user" "users" {
-  name     = "app"
-  password = "apppassword"
-  instance = google_sql_database_instance.master.name
-  type     = "CLOUD_IAM_USER"
-  depends_on = [
-    google_sql_database_instance.master
-  ]
-
-}
