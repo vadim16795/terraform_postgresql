@@ -3,9 +3,6 @@ terraform {
     google = {
       source  = "hashicorp/google"
     }
-    postgresql = {
-      source = "terraform-providers/postgresql"
-    }
   }
 }
 
