@@ -39,21 +39,12 @@ resource "google_sql_database_instance" "master" {
   }
 }
 resource "google_sql_user" "users" {
-  name     = "myapp"
-  password = "mypassword"
+  name     = "app"
+  password = "apppassword"
   instance = google_sql_database_instance.master.name
   type     = "CLOUD_IAM_USER"
   depends_on = [
     google_sql_database_instance.master
   ]
-}
-provider "postgresql" {
-  host            = google_sql_database_instance.master.public_ip_address
-  username        = google_sql_user.users.name
-  password        = google_sql_user.users.password
-}
 
-resource "postgresql_schema" "app" {
-  name  = "app"
-  owner = "myapp"
 }
