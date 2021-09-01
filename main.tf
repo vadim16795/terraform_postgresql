@@ -40,35 +40,35 @@ resource "google_sql_database_instance" "master" {
   }
 }
 
-resource "google_sql_user" "users" {
-  name     = "postgres"
-  instance = google_sql_database_instance.master.name
-  password = var.postgres_password
-}
+#resource "google_sql_user" "users" {
+#  name     = "postgres"
+#  instance = google_sql_database_instance.master.name
+#  password = var.postgres_password
+#}
 
 
-provider "postgresql" {
-  host            = tostring(google_sql_database_instance.master.public_ip_address)
-  port            = 5432
-  username        = "postgres"
-  password        = var.postgres_password
-  sslmode         = "require"
-  connect_timeout = 15
-}
+#provider "postgresql" {
+#  host            = tostring(google_sql_database_instance.master.public_ip_address)
+#  port            = 5432
+#  username        = "postgres"
+#  password        = var.postgres_password
+#  sslmode         = "require"
+#  connect_timeout = 15
+#}
 
-resource "postgresql_database" "prod" {
-  name              = "prod"
-  owner             = "postgres"
-  connection_limit  = -1
-  allow_connections = true
-}
+#resource "postgresql_database" "prod" {
+#  name              = "prod"
+#  owner             = "postgres"
+#  connection_limit  = -1
+#  allow_connections = true
+#}
 
-resource "postgresql_database" "stage" {
-  name              = "stage"
-  owner             = "postgres"
-  connection_limit  = -1
-  allow_connections = true
-}
+#resource "postgresql_database" "stage" {
+#  name              = "stage"
+#  owner             = "postgres"
+#  connection_limit  = -1
+#  allow_connections = true
+#}
 
 #resource "google_service_account" "default" {
 #  account_id   = "service-account-id"
