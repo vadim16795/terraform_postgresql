@@ -44,7 +44,7 @@ provider "postgresql" {
   host            = tostring(google_sql_database_instance.master.public_ip_address)
   port            = 5432
   username        = "postgres"
-  password        = "Oper@t10n"
+  password        = var.postgres_password
   sslmode         = "require"
   connect_timeout = 15
 }
