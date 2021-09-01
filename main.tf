@@ -15,8 +15,8 @@ provider "google" {
  project     = "varkhipovgcloudpostgresql"
  region      = "europe-west1"
 }
-resource "google_sql_database_instance" "mymaster" {
-  name             = "gcloudpostgresqlinstance"
+resource "google_sql_database_instance" "master" {
+  name             = "mygcloudpostgresqlinstance"
   database_version = "POSTGRES_9_6"
   region           = "europe-west1"
   deletion_protection = false
@@ -42,7 +42,7 @@ resource "google_sql_database_instance" "mymaster" {
 
 resource "google_sql_user" "users" {
   name     = "postgres"
-  instance = google_sql_database_instance.mymaster.name
+  instance = google_sql_database_instance.master.name
   password = var.postgres_password
 }
 
