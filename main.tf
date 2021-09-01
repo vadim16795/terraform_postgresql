@@ -19,7 +19,7 @@ resource "google_sql_database_instance" "master" {
   name             = "gcloudpostgresqlinstance"
   database_version = "POSTGRES_9_6"
   region           = "europe-west1"
-
+  deletion_protection = false
   settings {
     tier = "db-f1-micro"
     availability_type = "ZONAL"
@@ -49,16 +49,16 @@ provider "postgresql" {
   connect_timeout = 15
 }
 
-resource "postgresql_database" "prod" {
-  name              = "prod"
-  owner             = "postgres"
-  connection_limit  = -1
-  allow_connections = true
-}
+#resource "postgresql_database" "prod" {
+#  name              = "prod"
+#  owner             = "postgres"
+#  connection_limit  = -1
+#  allow_connections = true
+#}
 
-resource "postgresql_database" "stage" {
-  name              = "stage"
-  owner             = "postgres"
-  connection_limit  = -1
-  allow_connections = true
-}
+#resource "postgresql_database" "stage" {
+#  name              = "stage"
+#  owner             = "postgres"
+#  connection_limit  = -1
+#  allow_connections = true
+#}
