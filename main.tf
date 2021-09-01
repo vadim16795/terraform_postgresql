@@ -40,30 +40,6 @@ resource "google_sql_database_instance" "master" {
   }
 }
 
-resource "google_sql_database_instance" "master2" {
-  name             = "gcloudpostgresqlinstance2"
-  database_version = "POSTGRES_9_6"
-  region           = "europe-west1"
-
-  settings {
-    tier = "db-f1-micro"
-    availability_type = "ZONAL"
-    disk_autoresize = false
-    disk_size       = 10
-    disk_type       = "PD_HDD"
-      ip_configuration {
-        ipv4_enabled = true
-        authorized_networks {
-          name= "all_networks"
-          value = "0.0.0.0/0"
-        }
-      }
-      database_flags {
-        name = "cloudsql.iam_authentication"
-        value = "on"
-      }
-  }
-}
 provider "postgresql" {
   host            = tostring(google_sql_database_instance.master.public_ip_address)
   port            = 5432
@@ -72,11 +48,17 @@ provider "postgresql" {
   sslmode         = "require"
   connect_timeout = 15
 }
-resource "postgresql_database" "my_db" {
-  name              = "my_db"
+
+resource "postgresql_database" "prod" {
+  name              = "prod"
   owner             = "postgres"
-  template          = "template0"
-  lc_collate        = "C"
+  connection_limit  = -1
+  allow_connections = true
+}
+
+resource "postgresql_database" "stage" {
+  name              = "stage"
+  owner             = "postgres"
   connection_limit  = -1
   allow_connections = true
 }
