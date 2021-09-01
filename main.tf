@@ -2,6 +2,10 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
+    postgresql = {
+      source = "cyrilgdn/postgresql"
+      version = "1.14.0"
+    }
     }
   }
 }
@@ -35,3 +39,7 @@ resource "google_sql_database_instance" "master" {
       }
   }
 }
+
+#provider "postgresql" {
+  # Configuration options
+#}
