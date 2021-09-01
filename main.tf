@@ -40,7 +40,7 @@ resource "google_sql_database_instance" "master" {
   }
 }
 
-resource "google_sql_database_instance2" "master" {
+resource "google_sql_database_instance" "master" {
   name             = "gcloudpostgresqlinstance2"
   database_version = "POSTGRES_9_6"
   region           = "europe-west1"
