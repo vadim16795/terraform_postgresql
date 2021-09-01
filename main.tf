@@ -16,7 +16,7 @@ provider "google" {
  region      = "europe-west1"
 }
 resource "google_sql_database_instance" "master" {
-  name             = "mygcloudpostgresqlinstance"
+  name             = "gcloudpostgresqlinstance1"
   database_version = "POSTGRES_9_6"
   region           = "europe-west1"
   deletion_protection = false
