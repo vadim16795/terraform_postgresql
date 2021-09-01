@@ -66,11 +66,6 @@ resource "postgresql_database" "stage" {
   allow_connections = true
 }
 
-#resource "google_service_account" "default" {
-#  account_id   = "service-account-id"
-#  display_name = "Service Account"
-#}
-
 resource "google_container_cluster" "primary" {
   name     = "prod-app-cluster"
   location = "europe-west1-c"
@@ -90,6 +85,29 @@ resource "google_container_node_pool" "primary_nodes" {
 
   node_config {
     machine_type = "e2-medium"
+
+  }
+}
+
+resource "google_container_cluster" "secondary" {
+  name     = "stage-app-cluster"
+  location = "europe-west1-c"
+
+  # We can't create a cluster with no node pool defined, but we want to only use
+  # separately managed node pools. So we create the smallest possible default
+  # node pool and immediately delete it.
+  remove_default_node_pool = true
+  initial_node_count       = 1
+}
+
+resource "google_container_node_pool" "secondary_nodes" {
+  name       = "prod-app-pool"
+  location   = "europe-west1-c"
+  cluster    = google_container_cluster.primary.name
+  node_count = 1
+
+  node_config {
+    machine_type = "e2-micro"
 
   }
 }
