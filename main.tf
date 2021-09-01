@@ -33,10 +33,6 @@ resource "google_sql_database_instance" "master" {
           value = "0.0.0.0/0"
         }
       }
-      database_flags {
-        name = "cloudsql.iam_authentication"
-        value = "on"
-      }
   }
 }
 
