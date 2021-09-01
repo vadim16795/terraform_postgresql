@@ -41,7 +41,7 @@ resource "google_sql_database_instance" "master" {
 }
 
 provider "postgresql" {
-  host            = "google_sql_database_instance.master.ip_address"
+  host            = tosting(google_sql_database_instance.master.ip_address)
   port            = 5432
   username        = "postgres"
   password        = "Oper@t10n"
