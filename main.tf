@@ -101,7 +101,7 @@ resource "google_container_cluster" "secondary" {
 }
 
 resource "google_container_node_pool" "secondary_nodes" {
-  name       = "prod-app-pool"
+  name       = "stage-app-pool"
   location   = "europe-west1-c"
   cluster    = google_container_cluster.primary.name
   node_count = 1
