@@ -46,17 +46,6 @@ resource "google_sql_user" "users" {
   password = var.postgres_password
 }
 
-resource "google_sql_user" "users" {
-  name     = "prod"
-  instance = google_sql_database_instance.master.name
-  password = var.postgres_password
-}
-
-resource "google_sql_user" "users" {
-  name     = "stage"
-  instance = google_sql_database_instance.master.name
-  password = var.postgres_password
-}
 
 #provider "postgresql" {
 #  host            = tostring(google_sql_database_instance.master.public_ip_address)
