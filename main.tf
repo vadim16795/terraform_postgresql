@@ -40,6 +40,19 @@ resource "google_sql_database_instance" "master" {
   }
 }
 
-#provider "postgresql" {
-  # Configuration options
-#}
+provider "postgresql" {
+  host            = google_sql_database_instance.master.ip_address
+  port            = 5432
+  username        = "postgres"
+  password        = "Oper@t10n"
+  sslmode         = "require"
+  connect_timeout = 15
+}
+resource "postgresql_database" "my_db" {
+  name              = "my_db"
+  owner             = "postgres"
+  template          = "template0"
+  lc_collate        = "C"
+  connection_limit  = -1
+  allow_connections = true
+}
